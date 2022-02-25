@@ -2,6 +2,8 @@
 
 If you install System.Diagnostics.DiagnosticSource >= 4.7.1 corrolation is broken with servicebustriggers.
 
+> It also breaks the support for Activity Tags to end up in Custom Properties of the current trace.
+
 # Why it's an issue
 
 Many libraries make use of ActivitySource and Activities for OpenTelemetry concepts.
