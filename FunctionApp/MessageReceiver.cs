@@ -18,9 +18,11 @@ namespace FunctionApp
         {
             var diagnosticParentId = message.ApplicationProperties["Diagnostic-Id"] as string;
             var actualMessage = Encoding.UTF8.GetString(message.Body);
-            Activity.Current?.AddTag("FromServiceBus", "1");
-            Activity.Current?.AddTag("FromUserPropertiesDiagnosticId", diagnosticParentId);
-            Activity.Current?.AddTag("Message", actualMessage);
+            var activity = Activity.Current;
+            activity.SetParentId(diagnosticParentId);
+            activity.AddTag("FromServiceBus", "1");
+            activity.AddTag("FromUserPropertiesDiagnosticId", diagnosticParentId);
+            activity.AddTag("Message", actualMessage);
             log.LogInformation("Message coming from message queue is {message}", actualMessage);
         }
     }
