@@ -19,7 +19,6 @@ namespace FunctionApp
             var diagnosticParentId = message.ApplicationProperties["Diagnostic-Id"] as string;
             var actualMessage = Encoding.UTF8.GetString(message.Body);
             var activity = Activity.Current;
-            activity.SetParentId(diagnosticParentId);
             activity.AddTag("FromServiceBus", "1");
             activity.AddTag("FromUserPropertiesDiagnosticId", diagnosticParentId);
             activity.AddTag("Message", actualMessage);
